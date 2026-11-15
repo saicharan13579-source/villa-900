@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Villa 900</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -531,6 +531,79 @@ em.hl{font-style:italic;color:var(--accent);white-space:nowrap}
 @media (max-width:760px){.pond{gap:4px;padding:0 8px}.bar .stone{width:11px;height:8px}.bar .t{display:none}}
 .dots{display:none}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}.slide [data-r]{opacity:1;transform:none}}
+
+/* ================= RESPONSIVE SYSTEM ================= */
+html{scroll-snap-type:none}
+@media (min-width:1001px) and (min-height:680px){html{scroll-snap-type:y proximity}}
+.slide{min-height:100vh;min-height:100svh}
+/* cover: text-free elevation that fits every aspect ratio */
+#s1 .wrap{display:none}
+#s1{min-height:100vh;min-height:100svh;padding:0;background:#20201e}
+#s1::before{content:"";position:absolute;inset:-40px;background:url(assets/hero-front-poster.jpg) center/cover;filter:blur(26px) brightness(.8) saturate(1.1);transform:scale(1.08)}
+#s1 .shade{background:linear-gradient(180deg,transparent 72%,rgba(250,247,241,.55) 92%,var(--paper))}
+@media (max-aspect-ratio:6/5){#s1 .vid{object-fit:contain}#s1 .d-grass{opacity:.75}}
+#s1 .cue{position:absolute;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);opacity:.8}
+#s1 .cue i{width:1px;height:34px;background:linear-gradient(var(--ink),transparent);animation:cue 1.8s ease-in-out infinite;transform-origin:top}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+/* safe areas + presenter bar on small screens */
+.top{padding-top:max(16px,env(safe-area-inset-top))}
+.bar{bottom:calc(14px + env(safe-area-inset-bottom));max-width:calc(100% - 16px)}
+/* tablets & phones */
+@media (max-width:900px){
+  .ghost{display:none}
+  .slide:not(#s1){min-height:0;padding:78px 0 96px}
+  .wrap{width:min(1280px,100% - 32px)}
+  .copy h2{font-size:clamp(32px,8.6vw,52px);margin:10px 0 14px}
+  .copy .lede{font-size:16px;max-width:none}
+  .kpis{grid-template-columns:1fr 1fr}
+  .kpis div{padding:18px 14px 16px}
+  .kpis b{font-size:clamp(34px,10vw,56px);white-space:nowrap}
+  .kpis b small{font-size:.32em;margin-left:4px}
+  .kpis span{font-size:12.5px}
+  .frame{padding:10px}
+  .split .frame svg{max-height:none}
+  #laySvg,#hhPlan{max-height:none}
+  .floor .copy{max-height:none;overflow:visible}
+  .bar .t{display:none}
+}
+@media (max-width:420px){.wrap{width:calc(100% - 24px)}.kpis b{font-size:clamp(30px,9.4vw,44px)}}
+/* short landscape screens (phones on their side, small laptops) */
+@media (max-height:600px) and (orientation:landscape){
+  .ghost{display:none}
+  .slide:not(#s1){min-height:0;padding:70px 0 84px}
+  .split .frame svg,#laySvg,#hhPlan,.floor svg.cad{max-height:none}
+  .floor .copy{max-height:none;overflow:visible}
+  .copy h2{font-size:clamp(30px,5vw,48px)}
+  .ribbon{display:none}
+  #s1 .cue{bottom:74px}
+}
+/* large monitors, TVs and projectors */
+@media (min-width:1700px){
+  .wrap{width:min(1560px,100% - 140px)}
+  .split{grid-template-columns:minmax(360px,470px) 1fr;gap:80px}
+  .copy .lede{font-size:19px}
+  .points li{font-size:17px}
+  .eyebrow{font-size:12px}
+  .small{font-size:11.5px}
+  .kpis span{font-size:16px}
+}
+@media (min-width:2300px){
+  .wrap{width:min(2000px,100% - 220px)}
+  .split{grid-template-columns:minmax(420px,560px) 1fr;gap:110px}
+  .copy .lede{font-size:22px}
+  .points li{font-size:19px}
+  .eyebrow{font-size:13.5px}
+  .small{font-size:13px}
+  .top b{font-size:30px}
+  .bar{transform:translateX(-50%) scale(1.2);transform-origin:bottom center}
+}
+@media (min-aspect-ratio:2/1){#s1 .vid{object-fit:contain}}
+#s1 .d-grass{max-height:24vh;object-fit:cover;object-position:bottom}
+@media (max-height:600px){.bar{transform:translateX(-50%) scale(.82);transform-origin:bottom center}#s1 .cue{display:none}}
+html,body{overflow-x:hidden;overflow-x:clip}
+#s1{overflow:hidden;overflow:clip}
+/* ultra-wide screens: keep content centred and readable */
+@media (min-aspect-ratio:21/9){.wrap{width:min(2000px,78vw)}}
 </style>
 </head>
 <body>
@@ -4450,6 +4523,7 @@ em.hl{font-style:italic;color:var(--accent);white-space:nowrap}
   <div class="d-paper" aria-hidden="true"></div>
   <img class="dl d-branch" data-l="branch" src="assets/fg-branch.webp" alt="" aria-hidden="true">
   <img class="dl d-plant" data-l="plant" src="assets/fg-plant.webp" alt="" aria-hidden="true">
+  <div class="cue" aria-hidden="true"><span>Scroll to explore</span><i></i></div>
   <div class="clock" id="clock" aria-hidden="true"><i></i><span id="clockT">5:40 PM</span></div>
   <div class="wrap">
     <p class="eyebrow" id="hEy">A luxury residence · 900 sq yd · <span data-c="name">East-facing</span></p>
@@ -5061,7 +5135,7 @@ const chOf=id=>CHS.findIndex(c=>c[3].includes(id));
   slides.forEach(s=>{if(s.id==='s1'||s.id==='s5'||s.id==='s6')return;const e=s.querySelector('.eyebrow');const ci=chOf(s.id);if(!e||ci<0)return;const rest=e.innerHTML.replace(/^\s*\d+\s*·\s*/,'');e.innerHTML=`Chapter ${CHS[ci][0]} · ${CHS[ci][1]} <span style="color:var(--muted)">— ${rest}</span>`});
   let lastCh=-1,first=true;const _sc=setCur;
   setCur=function(i){_sc(i);const ci=chOf(slides[i].id);rb.querySelectorAll('button').forEach((b,k)=>{b.classList.toggle('on',k===ci);b.classList.toggle('past',k<ci)});
-    if(ci!==lastCh){if(!first&&!reduce&&hasG&&ci>lastCh){card.querySelector('i').textContent=CHS[ci][0]+' · '+CHS[ci][1];card.querySelector('b').textContent=CHS[ci][2];gsap.killTweensOf(card);gsap.fromTo(card,{opacity:0},{opacity:1,duration:.35,yoyo:true,repeat:1,repeatDelay:.8})}lastCh=ci;first=false}};
+    if(ci!==lastCh){if(!first&&!reduce&&hasG&&ci>lastCh&&innerWidth>900&&innerHeight>600){card.querySelector('i').textContent=CHS[ci][0]+' · '+CHS[ci][1];card.querySelector('b').textContent=CHS[ci][2];gsap.killTweensOf(card);gsap.fromTo(card,{opacity:0},{opacity:1,duration:.35,yoyo:true,repeat:1,repeatDelay:.8})}lastCh=ci;first=false}};
   setCur(cur);
 })();
 
@@ -5523,6 +5597,7 @@ function renderAreas(){
     .fromTo('#clock',{opacity:0,y:-8},{opacity:1,y:0,duration:.6},'-=.5')};
   if(!anim){I.remove();window.__heroT0=performance.now();return}
   gsap.set(['#hEy','#hT span','#hL','#hR','#clock'],{opacity:0});
+  const H=document.documentElement;H.style.overflow='hidden';document.body.style.overflow='hidden';scrollTo(0,0);
   // --- WebGL sky ---
   const cv=$('#skyC');let gl=null;try{gl=cv.getContext('webgl',{antialias:false,premultipliedAlpha:false})}catch(_){}
   const U={D:0};let raf=0,alive=true;
@@ -5556,11 +5631,11 @@ void main(){vec2 uv=gl_FragCoord.xy/R;vec2 p=(gl_FragCoord.xy-.5*R)/R.y;
       const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
       const la=gl.getAttribLocation(pr,'a');gl.enableVertexAttribArray(la);gl.vertexAttribPointer(la,2,gl.FLOAT,false,0,0);
       const uR=gl.getUniformLocation(pr,'R'),uT=gl.getUniformLocation(pr,'T'),uD=gl.getUniformLocation(pr,'D');
-      const size=()=>{const k=Math.min(.6,900/Math.max(innerWidth,innerHeight));cv.width=Math.round(innerWidth*k);cv.height=Math.round(innerHeight*k);gl.viewport(0,0,cv.width,cv.height)};size();addEventListener('resize',size);
+      const size=()=>{const k=Math.min(.6,1280/Math.max(innerWidth,innerHeight));cv.width=Math.round(innerWidth*k);cv.height=Math.round(innerHeight*k);gl.viewport(0,0,cv.width,cv.height)};size();addEventListener('resize',size);
       const t0=performance.now();const loop=now=>{if(!alive)return;gl.uniform2f(uR,cv.width,cv.height);gl.uniform1f(uT,(now-t0)/1000+20.);gl.uniform1f(uD,U.D);gl.drawArrays(gl.TRIANGLES,0,3);raf=requestAnimationFrame(loop)};raf=requestAnimationFrame(loop);
     }catch(err){gl=null;console.warn(err)}}
   if(!gl)I.classList.add('nogl');
-  const finish=()=>{alive=false;cancelAnimationFrame(raf);I.remove();window.__heroT0=performance.now()};
+  const finish=()=>{alive=false;cancelAnimationFrame(raf);I.remove();H.style.overflow='';document.body.style.overflow='';window.__heroT0=performance.now()};
   const tl=gsap.timeline({onComplete:finish});
   tl.from('#intro .c .k',{opacity:0,y:10,duration:.8,ease:'power2.out'},.3)
     .fromTo('#intro .c b',{opacity:0,letterSpacing:'.18em',filter:'blur(8px)'},{opacity:1,letterSpacing:'.02em',filter:'blur(0px)',duration:1.6,ease:'expo.out'},.45)
@@ -5574,7 +5649,7 @@ void main(){vec2 uv=gl_FragCoord.xy/R;vec2 p=(gl_FragCoord.xy-.5*R)/R.y;
     .fromTo('#heroV',{scale:1.32},{scale:1.08,duration:2.6,ease:'expo.out',clearProps:'transform'},'down+=2.3')
     .add(reveal,'down+=2.75');
   let skipped=false;const skip=()=>{if(skipped)return;skipped=true;const p=tl.labels.down;if(tl.time()<p)tl.seek(p);tl.timeScale(2.6)};
-  I.addEventListener('click',skip);addEventListener('keydown',skip,{once:true});addEventListener('wheel',skip,{once:true,passive:true});addEventListener('touchmove',skip,{once:true,passive:true});
+  I.addEventListener('pointerdown',skip);addEventListener('keydown',skip,{once:true});addEventListener('wheel',skip,{once:true,passive:true});
 })();
 /* other clips play only while on screen */
 [['#setV','set'],['#endV','s13']].forEach(([sel,id])=>{const v=$(sel);new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)v.play().catch(()=>{});else v.pause()}),{threshold:.35}).observe(v)});
