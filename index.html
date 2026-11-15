@@ -541,7 +541,8 @@ html{scroll-snap-type:none}
 #s1{min-height:100vh;min-height:100svh;padding:0;background:#20201e}
 #s1::before{content:"";position:absolute;inset:-40px;background:url(assets/hero-front-poster.jpg) center/cover;filter:blur(26px) brightness(.8) saturate(1.1);transform:scale(1.08)}
 #s1 .shade{background:linear-gradient(180deg,transparent 72%,rgba(250,247,241,.55) 92%,var(--paper))}
-@media (max-aspect-ratio:6/5){#s1 .vid{object-fit:contain}#s1 .d-grass{opacity:.75}}
+@media (max-aspect-ratio:6/5){#s1 .vid{--vw2:min(170vw,177.78svh);object-fit:cover;inset:auto;width:var(--vw2);height:calc(var(--vw2)*.5625);left:calc(50% - var(--vw2)/2);top:calc(50% - var(--vw2)*.28125)}#s1 .d-grass{opacity:.75}}
+@media (max-width:600px){#intro .c .k,#intro .c span{letter-spacing:.12em;font-size:9.5px;padding:0 18px;line-height:1.8}#intro .ln{width:70vw}}
 #s1 .cue{position:absolute;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);opacity:.8}
 #s1 .cue i{width:1px;height:34px;background:linear-gradient(var(--ink),transparent);animation:cue 1.8s ease-in-out infinite;transform-origin:top}
 @keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
